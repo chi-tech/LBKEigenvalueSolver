@@ -37,7 +37,7 @@ void KEigenvalueSolver::PowerIteration()
   //================================================== Start power iterations
   int nit = 0;
   bool converged = false;
-  while (nit < options.max_iterations)
+  while (nit < max_iterations)
   {
     //============================================= Loop over groupsets
     MPI_Barrier(MPI_COMM_WORLD);
@@ -106,7 +106,7 @@ void KEigenvalueSolver::PowerIteration()
     F_prev = F_new;
     nit += 1;
 
-    if (k_eff_change < std::max(options.tolerance, 1.0e-12))
+    if (k_eff_change < std::max(tolerance, 1.0e-12))
       converged = true;
 
     //======================================== Print iteration summary

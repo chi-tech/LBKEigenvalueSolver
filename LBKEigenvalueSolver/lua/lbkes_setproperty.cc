@@ -1,11 +1,11 @@
 #include "../lbkes_k_eigenvalue_solver.h"
 
 #include "ChiLua/chi_lua.h"
+
 #include "ChiPhysics/chi_physics.h"
+extern ChiPhysics& chi_physics_handler;
 
 #include <chi_log.h>
-
-extern ChiPhysics& chi_physics_handler;
 extern ChiLog& chi_log;
 
 using namespace LinearBoltzmann;
@@ -68,12 +68,12 @@ int chiLBSSetMaxKIterations(lua_State* L)
   int num_iter = lua_tointeger(L, 2);
 
   chi_physics::Solver* psolver;
-  LinearBoltzmann::Solver* solver;
+  KEigenvalueSolver* solver;
   try
   {
     psolver = chi_physics_handler.solver_stack.at(solver_index);
 
-    solver = dynamic_cast<LinearBoltzmann::Solver*>(psolver);
+    solver = dynamic_cast<KEigenvalueSolver*>(psolver);
 
     if (not solver)
     {
@@ -97,7 +97,7 @@ int chiLBSSetMaxKIterations(lua_State* L)
         << "Must be >= 0.";
     exit(EXIT_FAILURE);
   }
-  solver->options.max_iterations = num_iter;
+  solver->max_iterations = num_iter;
 
   chi_log.Log(LOG_0)
       << "Eigenvalue max # iterations set to " << num_iter << ".";
@@ -119,12 +119,12 @@ int chiLBSSetKTolerance(lua_State* L)
   double tol = lua_tonumber(L, 2);
 
   chi_physics::Solver* psolver;
-  LinearBoltzmann::Solver* solver;
+  KEigenvalueSolver* solver;
   try
   {
     psolver = chi_physics_handler.solver_stack.at(solver_index);
 
-    solver = dynamic_cast<LinearBoltzmann::Solver*>(psolver);
+    solver = dynamic_cast<KEigenvalueSolver*>(psolver);
 
     if (not solver)
     {
@@ -148,7 +148,7 @@ int chiLBSSetKTolerance(lua_State* L)
         << "Must be >= 0.0.";
     exit(EXIT_FAILURE);
   }
-  solver->options.tolerance = tol;
+  solver->tolerance = tol;
 
   char buff[100];
   sprintf(buff, "%.4e", tol);
