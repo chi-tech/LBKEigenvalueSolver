@@ -9,7 +9,7 @@ endif()
 message(STATUS "CHI_TECH_DIR set to ${CHI_TECH_DIR}")
 
 #================================================ Set project targets
-SET(TARGET ChiTech)
+SET(TARGET LBKEigenvalueSolver)
 project(${TARGET} C CXX)
 
 #================================================ Set cmake variables
