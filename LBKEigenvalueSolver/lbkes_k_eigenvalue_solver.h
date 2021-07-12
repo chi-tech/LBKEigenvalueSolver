@@ -13,10 +13,10 @@ namespace LinearBoltzmann
 class KEigenvalueSolver : public LinearBoltzmann::Solver
 {
 public:
-  /**The current k-eigenvalue estimate*/
+  /**The current k-eigenvalue estimate.*/
   double k_eff = 1.0;
 
-  /**Iterative parameters*/
+  /**Iterative parameters.*/
   size_t max_iterations = 1000;
   double tolerance = 1.0e-8;
 

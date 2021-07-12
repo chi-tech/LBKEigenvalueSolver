@@ -31,7 +31,7 @@ if (scattering_order == nil) then scattering_order = 0 end
 
 -- k-eigenvalue iteration parameters
 if (max_iterations == nil) then max_iterations = 5000 end
-if (tolerance == nil) then tolerance = 1e-8 end
+if (tolerance == nil) then tolerance = 1.0e-8 end
 
 -- Source iteration parameters
 if (max_source_iterations == nil) then max_source_iterations = 500 end
@@ -87,7 +87,7 @@ G = chiPhysicsMaterialGetProperty(materials[1], TRANSPORT_XSECTIONS)["num_groups
 
 --############################################### Setup Physics
 -- Define solver
-phys = chiKEigenvalueLBSCreateSolver()
+phys = chiLBKESCreateSolver()
 
 -- Add region and discretization
 chiSolverAddRegion(phys, region)
@@ -112,15 +112,15 @@ chiLBSGroupsetSetIterativeMethod(phys, gs, NPT_GMRES_CYCLES)
 chiLBSGroupsetSetAngleAggregationType(phys, gs, LBSGroupset.ANGLE_AGG_SINGLE)
 
 -- Additional parameters
-chiLBSSetMaxKIterations(phys, max_iterations)
-chiLBSSetKTolerance(phys, tolerance)
-chiLBSSetUsePrecursors(phys, use_precursors)
+chiLBKESSetProperty(phys, MAX_ITERATIONS, max_iterations)
+chiLBKESSetProperty(phys, TOLERANCE, tolerance)
+chiLBSSetProperty(phys, USE_PRECURSORS, use_precursors)
 chiLBSSetProperty(phys, VERBOSE_INNER_ITERATIONS, false)
 chiLBSSetProperty(phys, VERBOSE_OUTER_ITERATIONS, false)
 
 --############################################### Initialize and Execute Solver
-chiKEigenvalueLBSInitialize(phys)
-chiKEigenvalueLBSExecute(phys)
+chiLBKESInitialize(phys)
+chiLBKESExecute(phys)
 
 --############################################### Get field functions
 --############################################### Line plot

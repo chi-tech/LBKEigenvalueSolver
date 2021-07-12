@@ -12,7 +12,7 @@ using namespace LinearBoltzmann;
 
 //###################################################################
 /**Creates a k-eigenvalue solver.*/
-int chiKEigenvalueLBSCreateSolver(lua_State* L)
+int chiLBKESCreateSolver(lua_State* L)
 {
   chi_log.Log(LOG_ALLVERBOSE_1)
       << "Creating k-Eigenvalue solver.";
