@@ -1,4 +1,4 @@
-//module:K Eigenvalue Solver
+//module: LinearBoltzmann::KEigenvalueSolver
 RegisterFunction(chiLBKESCreateSolver);
 RegisterFunction(chiLBKESInitialize);
 RegisterFunction(chiLBKESExecute);
