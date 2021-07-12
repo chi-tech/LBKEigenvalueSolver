@@ -12,7 +12,7 @@ using namespace LinearBoltzmann;
 
 //###################################################################
 /**Executes the k-eigenvalue solver.*/
-int chiKEigenvalueLBSExecute(lua_State* L)
+int chiLBKESExecute(lua_State* L)
 {
   int solver_index = lua_tonumber(L, 1);
 

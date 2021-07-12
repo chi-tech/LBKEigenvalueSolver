@@ -1,7 +1,8 @@
 //module:K Eigenvalue Solver
-RegisterFunction(chiKEigenvalueLBSCreateSolver);
-RegisterFunction(chiKEigenvalueLBSInitialize);
-RegisterFunction(chiKEigenvalueLBSExecute);
-RegisterFunction(chiLBSSetUsePrecursors);
-RegisterFunction(chiLBSSetMaxKIterations);
-RegisterFunction(chiLBSSetKTolerance);
+RegisterFunction(chiLBKESCreateSolver);
+RegisterFunction(chiLBKESInitialize);
+RegisterFunction(chiLBKESExecute);
+RegisterFunction(chiLBKESSetProperty);
+
+RegisterConstant(MAX_ITERATIONS, 1)
+RegisterConstant(TOLERANCE, 2)
