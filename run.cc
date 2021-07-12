@@ -1,7 +1,6 @@
 #include "chi_runtime.h"
 #include "ChiConsole/chi_console.h"
 
-
 int main(int argc, char** argv)
 {
   ChiTech::Initialize(argc,argv);
@@ -9,7 +8,6 @@ int main(int argc, char** argv)
 
   auto L = console.consoleState;
   #include "ChiMacros/lua_register_macro.h"
-  #include "lua/lua_register.h"
   #include "LBKEigenvalueSolver/lua/lua_register.h"
 
   ChiTech::RunBatch(argc, argv);
