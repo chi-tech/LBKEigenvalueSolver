@@ -57,17 +57,17 @@ int chiLBKESSetProperty(lua_State *L)
 
     int max_iters = lua_tointeger(L, 3);
 
-    if (max_iters < 0)
+    if (max_iters <= 0)
     {
       chi_log.Log(LOG_ALLERROR)
           << __FUNCTION__ << ": Invalid max_iterations value. "
-          << "Must be greater than zero.";
+          << "Must be in range (0, infinity).";
       exit(EXIT_FAILURE);
     }
-    solver->max_iterations = max_iters;
+    solver->max_iterations = static_cast<size_t>(max_iters);
 
     chi_log.Log(LOG_0)
-        << "max_iterations for KEigenvalueSolver set to "
+        << "KEigenvalueSolver max_iterations set to "
         << solver->max_iterations;
   }
 
@@ -77,7 +77,7 @@ int chiLBKESSetProperty(lua_State *L)
 
     double tol = lua_tonumber(L, 3);
 
-    if (0.0 < tol >= 1.0)
+    if (tol < 0.0 or tol > 1.0)
     {
       chi_log.Log(LOG_ALLERROR)
           << __FUNCTION__ << ": Invalid value for tolerance. "
@@ -90,7 +90,7 @@ int chiLBKESSetProperty(lua_State *L)
     sprintf(buff, "%.4e", tol);
 
     chi_log.Log(LOG_0)
-        << "tolerance for KEigenvalueSolver set to " << buff << ".";
+        << "KEigenvalueSolver tolerance set to " << buff << ".";
   }
   else
   {
