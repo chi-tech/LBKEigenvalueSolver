@@ -17,7 +17,7 @@ import textwrap
 
 kscript_path = os.path.dirname(os.path.abspath(__file__))
 kchi_src_path = os.path.join(kscript_path, '..')
-kpath_to_exe = os.path.join(kchi_src_path, 'bin/ChiTech')
+kpath_to_exe = os.path.join(kchi_src_path, 'bin/LBKEigenvalueSolver')
 
 tests_to_run = []
 print_only = False
