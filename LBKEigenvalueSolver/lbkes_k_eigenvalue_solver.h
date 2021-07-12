@@ -28,6 +28,7 @@ public:
 
   std::vector<double> precursor_new_local;
 
+public:
 
   void Initialize() override;
   void Execute() override;
