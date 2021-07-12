@@ -19,14 +19,14 @@ if (NOT DEFINED CMAKE_RUNTIME_OUTPUT_DIRECTORY)
 endif()
 
 #================================================ Include macros
-include(${CHI_TECH_DIR}/ChiResources/Macros/Downstream.cmake)
+include("${CHI_TECH_DIR}/ChiResources/Macros/Downstream.cmake")
 
 #================================================ Default include directories
 include_directories("${PROJECT_SOURCE_DIR}/LBKEigenvalueSolver")
 
 #================================================ Define source directories
 set(SOURCES "${PROJECT_SOURCE_DIR}/run.cc")
-add_subdirectory(${PROJECT_SOURCE_DIR}/LBKEigenvalueSolver)
+add_subdirectory("${PROJECT_SOURCE_DIR}/LBKEigenvalueSolver")
 
 #================================================ Create executable
 add_executable(${TARGET} "${SOURCES}")
