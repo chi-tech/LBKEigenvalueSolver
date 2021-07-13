@@ -1,6 +1,6 @@
 #include "../lbkes_k_eigenvalue_solver.h"
 
-#include "ChiLua/chi_lua.h"
+#include <chi_lua.h>
 
 #include "ChiPhysics/chi_physics.h"
 extern ChiPhysics& chi_physics_handler;
@@ -20,7 +20,6 @@ int chiLBKESSetProperty(lua_State *L)
     LuaPostArgAmountError(__FUNCTION__, 2, num_args);
 
   LuaCheckNilValue(__FUNCTION__, L, 1);
-
   int solver_index = lua_tonumber(L, 1);
 
   //============================================= Get pointer to solver
@@ -47,14 +46,12 @@ int chiLBKESSetProperty(lua_State *L)
 
   //============================================= Get property index
   LuaCheckNilValue(__FUNCTION__, L, 2);
-
   int property = lua_tonumber(L,2);
 
   //============================================= Handle properties
   if (property == MAX_ITERATIONS)
   {
     LuaCheckNilValue(__FUNCTION__, L, 3);
-
     int max_iters = lua_tointeger(L, 3);
 
     if (max_iters <= 0)
@@ -67,14 +64,13 @@ int chiLBKESSetProperty(lua_State *L)
     solver->max_iterations = static_cast<size_t>(max_iters);
 
     chi_log.Log(LOG_0)
-        << "KEigenvalueSolver max_iterations set to "
+        << "LinearBoltzmann::KEigenvalueSolver max_iterations set to "
         << solver->max_iterations;
   }
 
   else if (property == TOLERANCE)
   {
     LuaCheckNilValue(__FUNCTION__, L, 3);
-
     double tol = lua_tonumber(L, 3);
 
     if (tol < 0.0 or tol > 1.0)
@@ -90,7 +86,8 @@ int chiLBKESSetProperty(lua_State *L)
     sprintf(buff, "%.4e", tol);
 
     chi_log.Log(LOG_0)
-        << "KEigenvalueSolver tolerance set to " << buff << ".";
+        << "LinearBoltzmann::KEigenvalueSolver tolerance set to "
+        << buff << ".";
   }
   else
   {

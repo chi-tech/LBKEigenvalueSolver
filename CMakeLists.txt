@@ -25,12 +25,13 @@ include("${CHI_TECH_DIR}/ChiResources/Macros/Downstream.cmake")
 include_directories("${PROJECT_SOURCE_DIR}/LBKEigenvalueSolver")
 
 #================================================ Define source directories
-set(SOURCES "${PROJECT_SOURCE_DIR}/run.cc")
 add_subdirectory("${PROJECT_SOURCE_DIR}/LBKEigenvalueSolver")
 
 #================================================ Create executable
-add_executable(${TARGET} "${SOURCES}")
-target_link_libraries(${TARGET} ${CHI_LIBS})
+add_library(LBKESLib ${SOURCES})
+add_executable(${TARGET} "run.cc")
+target_link_libraries(LBKESLib ${CHI_LIBS})
+target_link_libraries(${TARGET} LBKESLib)
 
 # |------------ Write Makefile to root directory
 file(WRITE ${PROJECT_SOURCE_DIR}/Makefile "subsystem:\n" "\t$(MAKE) -C chi_build \n\n"
