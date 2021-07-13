@@ -1,7 +1,6 @@
 #include "lbkes_k_eigenvalue_solver.h"
 
 #include <chi_log.h>
-
 extern ChiLog& chi_log;
 
 using namespace LinearBoltzmann;

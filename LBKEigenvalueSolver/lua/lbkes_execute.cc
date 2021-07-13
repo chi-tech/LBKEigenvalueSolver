@@ -1,17 +1,17 @@
 #include "../lbkes_k_eigenvalue_solver.h"
 
-#include "ChiLua/chi_lua.h"
+#include <chi_lua.h>
+
 #include "ChiPhysics/chi_physics.h"
+extern ChiPhysics& chi_physics_handler;
 
 #include <chi_log.h>
-
-extern ChiPhysics& chi_physics_handler;
 extern ChiLog& chi_log;
 
 using namespace LinearBoltzmann;
 
 //###################################################################
-/**Executes the k-eigenvalue solver.*/
+/**Executes the solver.*/
 int chiLBKESExecute(lua_State* L)
 {
   int solver_index = lua_tonumber(L, 1);
@@ -29,7 +29,7 @@ int chiLBKESExecute(lua_State* L)
     {
       chi_log.Log(LOG_ALLERROR)
           << __FUNCTION__ << ": Incorrect solver-type. "
-          << "Cannot cast to KEigenvalue::Solver.";
+          << "Cannot cast to LinearBoltzmann::KEigenvalueSolver.";
       exit(EXIT_FAILURE);
     }
   }
@@ -40,8 +40,8 @@ int chiLBKESExecute(lua_State* L)
     exit(EXIT_FAILURE);
   }
 
+  //============================================= Execute
   solver->Execute();
 
   return 1;
 }
-
