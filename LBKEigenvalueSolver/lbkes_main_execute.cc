@@ -12,5 +12,6 @@ using namespace LinearBoltzmann;
 void KEigenvalueSolver::Execute()
 {
   PowerIteration();
-  chi_log.Log(LOG_0) << "KEigenvalue::Solver execution completed\n";
+  chi_log.Log(LOG_0)
+      << "LinearBoltzmann::KEigenvalueSolver execution completed\n\n";
 }

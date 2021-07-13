@@ -25,8 +25,8 @@ using namespace LinearBoltzmann;
 void KEigenvalueSolver::PowerIteration()
 {
   chi_log.Log(LOG_0)
-      << "\n\n********** Solving k-eigenvalue problem with "
-      << "the Power Method.\n\n";
+      << "\n********** Solving k-eigenvalue problem with "
+      << "the Power Method.\n";
 
   phi_old_local.assign(phi_old_local.size(), 1.0);
 
@@ -131,12 +131,12 @@ void KEigenvalueSolver::PowerIteration()
   ComputePrecursors();
 
   //================================================== Print summary
-  chi_log.Log(LOG_0)
-      << "\n";
+  chi_log.Log(LOG_0) << "\n";
   chi_log.Log(LOG_0)
       << "        Final k-eigenvalue    :        "
       << std::setprecision(6) << k_eff;
   chi_log.Log(LOG_0)
       << "        Final change          :        "
       << std::setprecision(6) << k_eff_change;
+  chi_log.Log(LOG_0) << "\n";
 }
