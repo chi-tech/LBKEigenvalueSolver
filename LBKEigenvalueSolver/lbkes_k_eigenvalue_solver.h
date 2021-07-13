@@ -1,5 +1,5 @@
-#ifndef _K_EIGENVALUE_SOLVER_H
-#define _K_EIGENVALUE_SOLVER_H
+#ifndef LBKES_K_EIGENVALUE_SOLVER_H
+#define LBKES_K_EIGENVALUE_SOLVER_H
 
 #include "LinearBoltzmannSolver/lbs_linear_boltzmann_solver.h"
 #include "ChiMath/UnknownManager/unknown_manager.h"
@@ -44,4 +44,4 @@ public:
 
 }
 
-#endif //_K_EIGENVALUE_SOLVER_H
+#endif //LBKES_K_EIGENVALUE_SOLVER_H
