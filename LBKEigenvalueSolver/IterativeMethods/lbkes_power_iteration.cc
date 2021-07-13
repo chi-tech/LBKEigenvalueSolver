@@ -42,7 +42,7 @@ void KEigenvalueSolver::PowerIteration()
     //============================================= Loop over groupsets
     MPI_Barrier(MPI_COMM_WORLD);
     int gs = -1;
-    for (auto& groupset : group_sets)
+    for (auto& groupset : groupsets)
     {
       ComputeSweepOrderings(groupset);
       InitFluxDataStructures(groupset);
@@ -74,17 +74,17 @@ void KEigenvalueSolver::PowerIteration()
       //                                         with a fixed fission source
       if (groupset.iterative_method == IterativeMethod::CLASSICRICHARDSON)
       {
-        ClassicRichardson(groupset, gs, sweep_scheduler,
+        ClassicRichardson(groupset, sweep_scheduler,
                           APPLY_WGS_SCATTER_SOURCE |
                           APPLY_AGS_SCATTER_SOURCE,
-                          false);
+                          options.verbose_inner_iterations);
       }
       else if (groupset.iterative_method == IterativeMethod::GMRES)
       {
-        GMRES(groupset, gs, sweep_scheduler,
+        GMRES(groupset, sweep_scheduler,
               APPLY_WGS_SCATTER_SOURCE,
               APPLY_AGS_SCATTER_SOURCE,
-              false);
+              options.verbose_inner_iterations);
       }
 
       CleanUpWGDSA(groupset);
