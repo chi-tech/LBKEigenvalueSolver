@@ -41,7 +41,6 @@ void KEigenvalueSolver::PowerIteration()
   {
     //============================================= Loop over groupsets
     MPI_Barrier(MPI_COMM_WORLD);
-    int gs = -1;
     for (auto& groupset : groupsets)
     {
       ComputeSweepOrderings(groupset);

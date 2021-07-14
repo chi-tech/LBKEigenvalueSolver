@@ -33,7 +33,7 @@ public:
   void Initialize() override;
   void Execute() override;
 
-  virtual void ComputePrecursors();
+  void ComputePrecursors();
 
   // IterativeMethods
   void PowerIteration();
