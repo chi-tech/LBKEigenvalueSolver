@@ -46,9 +46,11 @@ void KEigenvalueSolver::ComputePrecursors()
           {
             //======================================== Loop over groups
             for (size_t g = 0; g < groups.size(); ++g)
+            {
               precursor_new_local[jr + j] +=
                   xs->precursor_yield[j] / xs->precursor_lambda[j] *
                   xs->nu_delayed_sigma_f[g] * phi_new_local[ir + g] / k_eff;
+            }//for group
           }//for precursors
         }//if num_precursors > 0
       } //for node
