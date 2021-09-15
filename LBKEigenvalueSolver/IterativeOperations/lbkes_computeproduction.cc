@@ -47,20 +47,11 @@ double KEigenvalueSolver::ComputeFissionProduction()
       size_t ir = full_cell_view.MapDOF(i, 0, 0);
       double IntV_ShapeI = fe_intgrl_values.IntV_shapeI(i);
 
-      // only fissile materials contribute
-      if (xs->is_fissile)
-      {
-        for (size_t g = first_grp; g <= last_grp; ++g)
-        {
-          //TODO: Once checks are in place to ensure nu = nu_prompt +
-          //      nu_delayed, nu_sigma_f can be universally used here.
-          double nu_sigma_f =
-              (not options.use_precursors) ? xs->nu_sigma_f[g] :
-              xs->nu_prompt_sigma_f[g] + xs->nu_delayed_sigma_f[g];
-
-          local_production += nu_sigma_f * phi_new_local[ir + g] * IntV_ShapeI;
-        }// for group
-      }
+      //=================================== Loop over groups
+      for (size_t g = first_grp; g <= last_grp; ++g)
+        local_production += xs->nu_sigma_f[g] *
+                            phi_new_local[ir + g] *
+                            IntV_ShapeI;
     }//for node
   }//for cell
 
