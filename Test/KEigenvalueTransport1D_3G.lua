@@ -1,6 +1,6 @@
 -- 1D KEigen solver test with Vacuum BC.
 -- SDM: PWLD
--- Test: Final k-eigenvalue: 0.997501
+-- Test: Final k-eigenvalue: ???
 num_procs = 4
 
 
@@ -70,9 +70,9 @@ materials[1] = chiPhysicsAddMaterial("Fissile Material")
 
 chiPhysicsMaterialAddProperty(materials[1], TRANSPORT_XSECTIONS)
 
-num_groups = 1
+num_groups = 3
 chiPhysicsMaterialSetProperty(materials[1], TRANSPORT_XSECTIONS,
-                              CHI_XSFILE, "Test/one_grp.cxs")
+                              CHI_XSFILE, "Test/three_grp.cxs")
 
 --############################################### Setup Physics
 -- Define solver

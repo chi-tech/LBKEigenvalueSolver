@@ -41,7 +41,6 @@ void KEigenvalueSolver::PowerIteration()
   {
     //============================================= Loop over groupsets
     MPI_Barrier(MPI_COMM_WORLD);
-    int gs = -1;
     for (auto& groupset : groupsets)
     {
       ComputeSweepOrderings(groupset);
@@ -50,16 +49,11 @@ void KEigenvalueSolver::PowerIteration()
       InitWGDSA(groupset);
       InitTGDSA(groupset);
 
-      groupset.angle_agg.ZeroIncomingDelayedPsi();
-
       //======================================== Setup sweep chunk
       auto sweep_chunk = SetSweepChunk(groupset);
       MainSweepScheduler sweep_scheduler(SchedulingAlgorithm::DEPTH_OF_GRAPH,
                                          groupset.angle_agg,
                                          *sweep_chunk);
-
-      //======================================== Tool the sweep chunk
-      sweep_scheduler.sweep_chunk.SetDestinationPhi(phi_new_local);
 
       //======================================== Precompute the fission source
       q_moments_local.assign(q_moments_local.size(), 0.0);

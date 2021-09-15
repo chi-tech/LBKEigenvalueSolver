@@ -13,6 +13,8 @@ extern ChiLog& chi_log;
 
 using namespace LinearBoltzmann;
 
+//############################################################
+/**Set properties for the solver.*/
 int chiLBKESSetProperty(lua_State *L)
 {
   int num_args = lua_gettop(L);
@@ -58,14 +60,14 @@ int chiLBKESSetProperty(lua_State *L)
     {
       chi_log.Log(LOG_ALLERROR)
           << __FUNCTION__ << ": Invalid max_iterations value. "
-          << "Must be in range (0, infinity).";
+          << "Must be greater than 0.";
       exit(EXIT_FAILURE);
     }
     solver->max_iterations = static_cast<size_t>(max_iters);
 
     chi_log.Log(LOG_0)
-        << "LinearBoltzmann::KEigenvalueSolver max_iterations set to "
-        << solver->max_iterations;
+        << "LinearBoltzmann::KEigenvalueSolver: "
+        << "max_iterations set to " << solver->max_iterations << ".";
   }
 
   else if (property == TOLERANCE)
@@ -86,8 +88,8 @@ int chiLBKESSetProperty(lua_State *L)
     sprintf(buff, "%.4e", tol);
 
     chi_log.Log(LOG_0)
-        << "LinearBoltzmann::KEigenvalueSolver tolerance set to "
-        << buff << ".";
+        << "LinearBoltzmann::KEigenvalueSolver: "
+        << "tolerance set to " << buff << ".";
   }
   else
   {
