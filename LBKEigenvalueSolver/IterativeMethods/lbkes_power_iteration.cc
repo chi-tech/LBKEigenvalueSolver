@@ -122,7 +122,8 @@ void KEigenvalueSolver::PowerIteration()
   }//for k iterations
 
   //================================================== Initialize the precursors
-  ComputePrecursors();
+  if (options.use_precursors)
+    ComputePrecursors();
 
   //================================================== Print summary
   chi_log.Log(LOG_0) << "\n";
