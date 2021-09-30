@@ -21,6 +21,8 @@ public:
   double tolerance = 1.0e-8;
 
 public:
+  explicit KEigenvalueSolver(const std::string& in_text_name) :
+    LinearBoltzmann::Solver(in_text_name) {}
 
   void Execute() override;
 
