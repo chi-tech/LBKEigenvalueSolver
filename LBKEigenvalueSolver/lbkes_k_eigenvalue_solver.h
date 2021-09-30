@@ -29,6 +29,8 @@ public:
   std::vector<double> precursor_new_local;
 
 public:
+  explicit KEigenvalueSolver(const std::string& in_text_name) :
+    LinearBoltzmann::Solver(in_text_name) {}
 
   void Initialize() override;
   void Execute() override;
