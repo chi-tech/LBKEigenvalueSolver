@@ -24,8 +24,8 @@ double KEigenvalueSolver::ComputeFissionProduction()
   double local_production = 0.0;
   for (auto& cell : grid->local_cells)
   {
-    auto& full_cell_view = cell_transport_views[cell.local_id];
-    const auto& fe_intgrl_values = grid_fe_view->GetUnitIntegrals(cell);
+    const auto& transport_view = cell_transport_views[cell.local_id];
+    const auto& fe_values = grid_fe_view->GetUnitIntegrals(cell);
 
     //==================== Obtain xs
     int cell_matid = cell.material_id;
@@ -41,16 +41,16 @@ double KEigenvalueSolver::ComputeFissionProduction()
     auto xs = material_xs[xs_id];
 
     //======================================== Loop over nodes
-    const int num_nodes = full_cell_view.NumNodes();
+    const int num_nodes = transport_view.NumNodes();
     for (int i = 0; i < num_nodes; ++i)
     {
-      size_t ir = full_cell_view.MapDOF(i, 0, 0);
-      double IntV_ShapeI = fe_intgrl_values.IntV_shapeI(i);
+      size_t uk_map = transport_view.MapDOF(i, 0, 0);
+      double IntV_ShapeI = fe_values.IntV_shapeI(i);
 
       //=================================== Loop over groups
       for (size_t g = first_grp; g <= last_grp; ++g)
         local_production += xs->nu_sigma_f[g] *
-                            phi_new_local[ir + g] *
+                            phi_new_local[uk_map + g] *
                             IntV_ShapeI;
     }//for node
   }//for cell

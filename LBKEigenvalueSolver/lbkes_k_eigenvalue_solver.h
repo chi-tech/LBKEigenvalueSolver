@@ -20,22 +20,11 @@ public:
   size_t max_iterations = 1000;
   double tolerance = 1.0e-8;
 
-  /**Delayed neutron precursor information.*/
-  size_t num_precursors;
-  size_t max_num_precursors_per_material;
-
-  chi_math::UnknownManager precursor_uk_man;
-
-  std::vector<double> precursor_new_local;
-
 public:
   explicit KEigenvalueSolver(const std::string& in_text_name) :
     LinearBoltzmann::Solver(in_text_name) {}
 
-  void Initialize() override;
   void Execute() override;
-
-  void ComputePrecursors();
 
   // IterativeMethods
   void PowerIteration();
